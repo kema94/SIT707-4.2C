@@ -5,99 +5,81 @@ import org.junit.Test;
 
 /**
  * Tests functions in LoginForm.
- * @author Ahsan Habib
+ * @author KEMA SANKA SRINATH DISSANAYAKE GARUSINGHE ARACHCHIGE
  */
 public class LoginFormTest 
 {
+	//Test cases for login scenarios 
 
 	@Test
 	public void testStudentIdentity() {
 		String studentId = "223188749";
-		Assert.assertNotNull("Student ID is null", studentId);
+		Assert.assertNotNull("Student ID is", studentId);
 	}
 
 	@Test
 	public void testStudentName() {
 		String studentName = "KEMA SANKA SRINATH DISSANAYAKE GARUSINGHE ARACHCHIGE";
-		Assert.assertNotNull("Student name is null", studentName);
+		Assert.assertNotNull("Student name is", studentName);
 	}
 	
 	@Test
-    public void testFailEmptyUsernameAndEmptyPasswordAndDontCareValCode()
+    public void testFailEmptyUsernameAndEmptyPassword()
     {
 		LoginStatus status = LoginForm.login(null, null);
 		Assert.assertTrue( status.isLoginSuccess() == false );
     }
-	
-	/*
-	 * Write more test functions below.
-	 */
-	
+		
 	@Test
-	public void testFailEmptyUsernameAndWrongPasswordAndDontCareValCode()
+	public void testFailEmptyEmailAndWrongPassword()
     {
 		LoginStatus status = LoginForm.login(null, "5545");
 		Assert.assertTrue( status.isLoginSuccess() == false );
     }
 	
 	@Test
-	public void testFailWrongUsernameAndEmptyPasswordAndDontCareValCode()
+	public void testFailWrongUsernameAndEmptyPassword()
     {
-		LoginStatus status = LoginForm.login("kema", null);
+		LoginStatus status = LoginForm.login("xyz@gmail.com", null);
 		Assert.assertTrue( status.isLoginSuccess() == false );
     }
 	
 	@Test
-	public void testFailWrongUsernameAndWrongPasswordAndDontCareValCode()
+	public void testFailWrongEmailAndWrongPassword()
     {
-		LoginStatus status = LoginForm.login("kema", "5545");
+		LoginStatus status = LoginForm.login("xyz@gmail.com", "kema_pass");
 		Assert.assertTrue( status.isLoginSuccess() == false );
     }
 	
 	@Test
-	public void testFailWrongUsernameAndCorrectPasswordAndDontCareValCode()
+	public void testFailWrongEmailAndCorrectPassword()
     {
-		LoginStatus status = LoginForm.login("kema", "ahsan_pass");
+		LoginStatus status = LoginForm.login("xyz@gmail.com", "1234");
 		Assert.assertTrue( status.isLoginSuccess() == false );
     }
 	
 	@Test
-	public void testFailCorrectUsernameAndEmptyPasswordAndDontCareValCode()
+	public void testFailCorrectEmailAndEmptyPassword()
     {
-		LoginStatus status = LoginForm.login("ahsan", null);
+		LoginStatus status = LoginForm.login("kema@gmail.com", null);
 		Assert.assertTrue( status.isLoginSuccess() == false );
     }
 	
 	@Test
-	public void testFailCorrectUsernameAndWrongPasswordAndDontCareValCode()
+	public void testFailCorrectEmailAndWrongPassword()
     {
-		LoginStatus status = LoginForm.login("ahsan", "kema_pass");
+		LoginStatus status = LoginForm.login("kema@gmail.com", "8768");
 		Assert.assertTrue( status.isLoginSuccess() == false );
-    }
+    }	
 	
 	@Test
-	public void testFailCorrectUsernameAndCorrectPasswordAndDontCareValCode()
+	public void testFailCorrectEmailAndCorrectPassword()
     {
-		LoginStatus status = LoginForm.login("ahsan", "ahsan_pass");
-		LoginForm.validateCode(null);
+		LoginStatus status = LoginForm.login("kema@gmail.com", "1234");
 		Assert.assertTrue( status.isLoginSuccess() == true );
     }
 	
-	@Test
-	public void testFailCorrectUsernameAndCorrectPasswordAndWrongValCode()
-    {
-		LoginStatus status = LoginForm.login("ahsan", "ahsan_pass");
-		LoginForm.validateCode("54321");
-		Assert.assertTrue( status.isLoginSuccess() == true );
-    }
 	
-	@Test
-	public void testFailCorrectUsernameAndCorrectPasswordAndCorrectValCode()
-    {
-		LoginStatus status = LoginForm.login("ahsan", "ahsan_pass");
-		LoginForm.validateCode("12345");
-		Assert.assertTrue( status.isLoginSuccess() == true );
-    }
 	
 	
 }

@@ -1,51 +1,41 @@
 package sit707_week4;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+
+
 /**
  * Hello world!
  * 
- * @author Ahsan Habib
+ * @author Kema Sanka Srinath Dissanayake
  */
 public class Main 
 {
     public static void main( String[] args )
     {
-    	/*
-    	 * Failed login and don't care validation code.
-    	 */
-    	LoginStatus status = LoginForm.login(null, null);
-        System.out.println("[Empty username, empty password] >> " + status);
-        
-        status = LoginForm.login(null, "xyz");
-        System.out.println("[Empty username, wrong password] >> " + status);
-        
-        status = LoginForm.login("abc", "xyz");
-        System.out.println("[Wrong username, wrong password] >> " + status);
-        
-        status = LoginForm.login("ahsan", null);
-        System.out.println("[Correct username, empty password] >> " + status);
-        
-        status = LoginForm.login("ahsan", "xyz");
-        System.out.println("[Correct username, wrong password] >> " + status);
-        
-        status = LoginForm.login(null, "ahsan_pass");
-        System.out.println("[Empty username, Correct password] >> " + status);
-        
-        status = LoginForm.login("abc", "ahsan_pass");
-        System.out.println("[Wrong username, Correct password] >> " + status);
-        
-        /*
-         * Login success case, there is a validation code in errorMsg field.
-         */
-        status = LoginForm.login("ahsan", "ahsan_pass");
-        System.out.println("[Correct username, Correct password] >> " + status);
-        
-        if (status.isLoginSuccess()) {
-        	/*
-        	 * Test validation code cases
-        	 */
-        	System.out.println("\tEmpty code >> " + LoginForm.validateCode(null));
-        	System.out.println("\tWrong code >> " + LoginForm.validateCode("abcd"));
-        	System.out.println("\tCorrect code >> " + LoginForm.validateCode("123456"));
-        }
+    	
+    	System.setProperty("webdriver.chrome.driver", "C:\\Windows\\chromedriver-win64\\chromedriver.exe");
+    	//WebDriver driver = new ChromeDriver();
+    	
+    	ChromeDriver driver = new ChromeDriver();
+    	driver.get("https://www.bunnings.com.au/login");
+    	driver.findElement(By.id("okta-signin-username")).sendKeys("kemasanka981@gmail.com");
+    	driver.findElement(By.id("okta-signin-password")).sendKeys("1234");
+    	driver.findElement(By.xpath("//*[@id=\"okta-signin-submit\"]")).click();  
+    	sleep(50);
+    	driver.close();   
+    
     }
+    
+    public static void sleep(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
